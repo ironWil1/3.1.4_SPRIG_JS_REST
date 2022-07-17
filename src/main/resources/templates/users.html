@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Accounts List</title>
+</head>
+<body>
+<h1>Bank Accounts List</h1>
+<br/><br/>
+<div>
+    <h3><a href="/new">Add new Client</a></h3>
+    <table border="2">
+        <tr>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Account balance, $</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="user : ${listUsers}">
+            <td th:utext="${user.getId()}">VALUE</td>
+            <td th:utext="${user.getName()}">VALUE</td>
+            <td th:utext="${user.getSurName()}">VALUE</td>
+            <td th:utext="${user.getAccountBalance()}">VALUE</td>
+            <td>
+                <a th:href="@{/edit(id=${user.getId()})}" class="btn btn-danger">Edit</a>
+                <a th:href="@{/delete(id=${user.getId()})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

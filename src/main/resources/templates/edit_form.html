@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit form</title>
+</head>
+<body>
+<h1>Edit form</h1>
+<form action="#" th:action="@{/save(id=${user.getId()})}" th:object="${user}" method="post">
+    <table border="0" cellpadding="5">
+        <tr>
+            <td>ID:</td>
+            <td th:utext="${user.getId()}">VALUE</td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td><input type="text" th:field="*{surName}" /></td>
+        </tr>
+        <tr>
+            <td>Account balance:</td>
+            <td><input type="text" th:field="*{accountBalance}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Save" /> <input type="reset" value="Reset" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
