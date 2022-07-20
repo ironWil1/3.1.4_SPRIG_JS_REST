@@ -14,14 +14,16 @@
             <th>Client ID</th>
             <th>Name</th>
             <th>Surname</th>
-            <th>Account balance, $</th>
+            <th>Password</th>
+            <th>Role</th>
             <th>Actions</th>
         </tr>
         <tr th:each="user : ${listUsers}">
             <td th:utext="${user.getId()}">VALUE</td>
             <td th:utext="${user.getName()}">VALUE</td>
             <td th:utext="${user.getSurName()}">VALUE</td>
-            <td th:utext="${user.getAccountBalance()}">VALUE</td>
+            <td th:utext="${user.getPassword()}">VALUE</td>
+            <td th:utext="${user.getRoles()}">VALUE</td>
             <td>
                 <a th:href="@{/edit(id=${user.getId()})}" class="btn btn-danger">Edit</a>
                 <a th:href="@{/delete(id=${user.getId()})}" class="btn btn-danger">Delete</a>

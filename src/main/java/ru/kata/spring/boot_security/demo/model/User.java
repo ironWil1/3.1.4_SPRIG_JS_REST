@@ -1,25 +1,26 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @Table(name = "user")
-public class User {
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                ", accountBalance=" + password +
-                '}';
-    }
+@Data
+public class User implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name",unique = true)
     @Size(min = 2,max = 22,message = "Names length should be between 2 and 20 characters")
     @NotEmpty(message = "Crucial field")
     private String name;
@@ -28,46 +29,54 @@ public class User {
     @NotEmpty(message = "Crucial field")
     private String surName;
     @Column(name = "password")
-    private long password;
+    @Size(min = 5,max = 20,message = "Password length should be between 5 and 20 characters")
+    @NotEmpty(message = "Crucial field")
+    private String password;
+
+    @Column(name = "role")
+    @OneToMany(mappedBy="owner")
+    private List<Role> roles;
 
     public User() {
     }
+    @Override
+    public String getPassword() {
+        return String.valueOf(password);
+    }
 
-    public User(String name, String surName, long password) {
+    public User(String name, String surName, String password) {
         this.name = name;
         this.surName = surName;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getUsername() {
+        return getName();
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getSurName() {
-        return surName;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
-    public long getPassword() {
-        return password;
-    }
-
-    public void setPassword(long password) {
-        this.password = password;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
