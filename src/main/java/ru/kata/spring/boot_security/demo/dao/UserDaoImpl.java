@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -49,4 +50,12 @@ public class UserDaoImpl implements UserDao {
                 "SELECT u FROM User u", User.class);
         return query.getResultList();
     }
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> findUserByName(String username) {
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u where u.name = ?1", User.class);
+        return query.setParameter(1,username).getResultList().stream().findAny();
+    }
+
 }
