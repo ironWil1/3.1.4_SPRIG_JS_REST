@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Client</title>
+    <title>Registration</title>
 </head>
 <body>
-<h1>New client form</h1>
-<form action="#" th:action="@{/save}" th:object="${user}" method="post">
+
+<form th:method="POST" th:action="@{/registration}" th:object="${user}">
     <table border="0" cellpadding="5">
         <tr>
             <td>Name:</td>
@@ -32,24 +32,14 @@
 
         </tr>
         <tr>
-            <td>Select roles:
-                <select th:object="${user}"  th:field="*{roles}" id="role">
-                    <option value="ROLE_USER">User</option>
-                    <option value="ROLE_ADMIN">Admin</option>
-                </select>
+            <td>
+                <input type="submit" value="Sign up!"/>
             </td>
         </tr>
-        <tr>
-            <td><input type="submit" value="Save" /> <input type="reset" value="Reset" /></td>
-        </tr>
     </table>
-    <tr>
-        <td>
-            <form>
-                <button><a href="/logout">Logout</a></button>
-            </form>
-        </td>
-    </tr>
+
+
 </form>
 </body>
 </html>
+

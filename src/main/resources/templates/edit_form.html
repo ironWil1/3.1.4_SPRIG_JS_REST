@@ -15,8 +15,8 @@
         <tr>
             <td>Name:</td>
             <td>
-                <input type="text" th:field="*{name}" />
-                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+                <input type="text" th:field="*{username}" />
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">name error</div>
             </td>
         </tr>
         <tr>
@@ -34,9 +34,24 @@
             </td>
         </tr>
         <tr>
+            <td>Select roles:
+                <select th:object="${user}"  th:field="*{roles}" id="role">
+                    <option value="ROLE_USER">User</option>
+                    <option value="ROLE_ADMIN">Admin</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td><input type="submit" value="Save" /> <input type="reset" value="Reset" /></td>
         </tr>
     </table>
+    <tr>
+        <td>
+            <form>
+                <button><a href="/logout">Logout</a></button>
+            </form>
+        </td>
+    </tr>
 </form>
 </body>
 </html>

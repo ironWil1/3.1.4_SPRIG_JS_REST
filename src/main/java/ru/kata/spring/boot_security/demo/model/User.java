@@ -1,29 +1,30 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
 @Table(name = "user")
-@Data
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name",unique = true)
+    @Column(name = "username",unique = true)
     @Size(min = 2,max = 22,message = "Names length should be between 2 and 20 characters")
     @NotEmpty(message = "Crucial field")
-    private String name;
+    private String username;
     @Column(name = "surname")
     @Size(min = 2,max = 20,message = "Surname length should be between 2 and 20 characters")
     @NotEmpty(message = "Crucial field")
@@ -33,33 +34,41 @@ public class User implements UserDetails {
     @NotEmpty(message = "Crucial field")
     private String password;
 
-    @Column(name = "role")
-    @OneToMany(mappedBy="owner")
-    private List<Role> roles;
+    @OneToMany(mappedBy="owner",
+                cascade = {CascadeType.DETACH,CascadeType.MERGE,
+                CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
+                fetch= FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
     }
-    @Override
-    public String getPassword() {
-        return String.valueOf(password);
-    }
 
-    public User(String name, String surName, String password) {
-        this.name = name;
+    public User(String username, String surName, String password) {
+        this.username = username;
         this.surName = surName;
         this.password = password;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public String getPassword() {
+        return String.valueOf(password);
+    }
+
+    public void addRole(Role someRole) {
+        if(roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(someRole);
+        someRole.setOwner(this);
     }
 
     @Override
-    public String getUsername() {
-        return getName();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        getRoles().forEach(role -> grantedAuthorityList.add(new SimpleGrantedAuthority(role.getRole())));
+        return grantedAuthorityList;
+        //Collections.singletonList(new SimpleGrantedAuthority(getRoles().toString()))
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

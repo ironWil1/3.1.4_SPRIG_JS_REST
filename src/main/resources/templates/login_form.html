@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LOGIN</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/process_login}">
+  <h2>Enter your credentials</h2>
+  <table border="0" cellpadding="5">
+    <tr>
+      <td>Enter Username:</td>
+      <td>
+        <input type="text" name="username" id="username" />
+
+      </td>
+
+    </tr>
+      <td>Enter the Password:</td>
+      <td>
+        <input type="password" name="password" id="password" />
+
+      </td>
+
+    </tr>
+    <tr>
+    <td>
+      <input type="submit" value="Sign in!"/>
+    </td>
+  </tr>
+    <tr>
+      <td>
+    <div th:if="${param.error}" style="color: red" >Wrong username or password</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <form>
+          <button><a th:href="@{/registration}" class="btn btn-danger">Registration</a></button>
+        </form>
+      </td>
+    </tr>
+  </table>
+
+
+</form>
+</body>
+</html>

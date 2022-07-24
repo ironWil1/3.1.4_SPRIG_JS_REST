@@ -6,7 +6,6 @@
 </head>
 <body>
 <h1>Bank Accounts List</h1>
-<br/><br/>
 <div>
     <h3><a href="/new">Add new Client</a></h3>
     <table border="2">
@@ -20,7 +19,7 @@
         </tr>
         <tr th:each="user : ${listUsers}">
             <td th:utext="${user.getId()}">VALUE</td>
-            <td th:utext="${user.getName()}">VALUE</td>
+            <td th:utext="${user.getUsername()}">VALUE</td>
             <td th:utext="${user.getSurName()}">VALUE</td>
             <td th:utext="${user.getPassword()}">VALUE</td>
             <td th:utext="${user.getRoles()}">VALUE</td>
@@ -30,6 +29,14 @@
             </td>
         </tr>
     </table>
+    <tr>
+        <td>
+            <form>
+                <button><a href="/logout">Logout</a></button>
+            </form>
+        </td>
+    </tr>
+
 </div>
 </body>
 </html>

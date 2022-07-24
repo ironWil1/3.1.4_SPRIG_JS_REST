@@ -18,5 +18,7 @@ public interface UserDao {
 
     Optional<User> findUserByName(String username);
 
+    void cleanBindedRoles(User user);
+    void persistRoles(User user);
 
 }
