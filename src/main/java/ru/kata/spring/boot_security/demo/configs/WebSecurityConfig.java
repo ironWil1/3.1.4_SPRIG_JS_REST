@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/registration", "/login","/error","/logout").permitAll()
+                .antMatchers("/registration", "/login","/error").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
                 .loginProcessingUrl("/process_login")
@@ -42,18 +42,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .and()
                 .logout()
+                .permitAll()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessDenied");
-
-
-//                .and()
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
     }
 
     // аутентификация inMemory

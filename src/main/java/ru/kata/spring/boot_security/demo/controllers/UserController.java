@@ -1,11 +1,7 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,8 +12,6 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 
 @Controller

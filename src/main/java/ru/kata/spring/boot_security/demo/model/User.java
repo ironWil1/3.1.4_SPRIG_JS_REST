@@ -67,7 +67,6 @@ public class User implements UserDetails {
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         getRoles().forEach(role -> grantedAuthorityList.add(new SimpleGrantedAuthority(role.getRole())));
         return grantedAuthorityList;
-        //Collections.singletonList(new SimpleGrantedAuthority(getRoles().toString()))
     }
     @Override
     public boolean isAccountNonExpired() {
