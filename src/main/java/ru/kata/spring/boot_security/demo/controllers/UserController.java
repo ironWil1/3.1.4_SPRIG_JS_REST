@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping(value = "/admin")
     public ModelAndView home() {
         List<User> listUsers = userService.getAll();
-        ModelAndView mav = new ModelAndView("users");
+        ModelAndView mav = new ModelAndView("admin_homepage");
         mav.addObject("listUsers", listUsers);
         return mav;
     }
@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping("/user")
     public ModelAndView currentUser(Principal principal) {
-        ModelAndView userView = new ModelAndView("user");
+        ModelAndView userView = new ModelAndView("user_homepage");
         ModelAndView loginView = new ModelAndView("login_form");
         if (principal == null) {
             return loginView;
