@@ -37,7 +37,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy="owner",
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
-                fetch= FetchType.EAGER)
+                fetch= FetchType.LAZY)
     private Set<Role> roles;
 
     public User() {
@@ -47,6 +47,13 @@ public class User implements UserDetails {
         this.username = username;
         this.surName = surName;
         this.password = password;
+    }
+
+    public User(String username, String surName, String password, Set<Role> roles) {
+        this.username = username;
+        this.surName = surName;
+        this.password = password;
+        this.roles = roles;
     }
 
     @Override

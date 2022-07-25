@@ -53,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // аутентификация inMemory
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        User admin = new User("user","user","user");
+        admin.addRole(new Role(Roles.adminRole()));
+        userDao.saveUser(admin);
         auth.userDetailsService(userDetailService);
     }
 
