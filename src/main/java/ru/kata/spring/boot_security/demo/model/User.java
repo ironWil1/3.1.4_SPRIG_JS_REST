@@ -38,7 +38,8 @@ public class User implements UserDetails {
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
                 fetch= FetchType.LAZY)
-    private Set<Role> roles;
+
+    private List<Role> roles;
 
     public User() {
     }
@@ -49,7 +50,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public User(String username, String surName, String password, Set<Role> roles) {
+    public User(String username, String surName, String password, List<Role> roles) {
         this.username = username;
         this.surName = surName;
         this.password = password;
@@ -63,7 +64,7 @@ public class User implements UserDetails {
 
     public void addRole(Role someRole) {
         if(roles == null) {
-            roles = new HashSet<>();
+            roles = new ArrayList<>();
         }
         roles.add(someRole);
         someRole.setOwner(this);
