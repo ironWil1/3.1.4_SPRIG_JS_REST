@@ -13,21 +13,21 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3 align-items-end bg-dark">
         <div th:align="left" class="col-md-6">
-            <h2>
+            <h3 class="text-white">
                 <a>User:</a>
-                <span th:utext="${user.getUsername()} ">Username</span>
-                <a>With roles:</a>
+                <span  th:utext="${user.getUsername()} ">Username</span>
+                <a >With roles:</a>
                 <span th:each="role : ${user.getRoles()}">
                     <span th:utext="${role.toString()}">Role</span>
                 </span>
-            </h2>
+            </h3>
         </div>
-        <div class="col-md-6">
-            <p>
-                <a th:align="right" class="btn" href="#">Logout</a>
-            </p>
+        <div th:align="right" class="col-md-6">
+            <h5>
+                <a class="text-muted" href="#" style="text-decoration: none">Logout</a>
+            </h5>
         </div>
     </div>
     <div class="row">
@@ -50,8 +50,8 @@
                     <a class="nav-link" href="/admin/new">New User</a>
                 </li>
             </ul>
-            <table class="table" th:align="center" th:border="">
-                <thead>
+            <table class="table" th:align="center" th:border="1">
+                <thead class="thead-dark">
                 <h3>All users</h3>
                 <tr>
                     <th>
