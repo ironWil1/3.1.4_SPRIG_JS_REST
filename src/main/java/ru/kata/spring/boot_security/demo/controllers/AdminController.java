@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -23,10 +24,12 @@ public class AdminController {
     }
 
     @GetMapping(value = "")
-    public ModelAndView home() {
+    public ModelAndView home(Principal principal) {
+        User user = userService.findUserByname(principal.getName()).get();
         List<User> listUsers = userService.getAll();
         ModelAndView mav = new ModelAndView("admin_homepage");
         mav.addObject("listUsers", listUsers);
+        mav.addObject("user",user);
         return mav;
     }
 
