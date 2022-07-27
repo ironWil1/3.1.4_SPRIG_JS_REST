@@ -29,6 +29,15 @@ public class User implements UserDetails {
     @Size(min = 2,max = 20,message = "Surname length should be between 2 and 20 characters")
     @NotEmpty(message = "Crucial field")
     private String surName;
+
+    @Column(name="email")
+    @NotEmpty(message = "Email should be filled")
+    private String email;
+
+    @Column(name="age")
+    @NotEmpty(message = "Age should be filled")
+    private String age;
+
     @Column(name = "password")
     @Size(min = 5,max = 20,message = "Password length should be between 5 and 20 characters")
     @NotEmpty(message = "Crucial field")
@@ -38,23 +47,26 @@ public class User implements UserDetails {
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
                 fetch= FetchType.LAZY)
-
     private List<Role> roles;
 
     public User() {
     }
 
-    public User(String username, String surName, String password) {
+    public User(String username, String surName, String email, String age, String password, List<Role> roles) {
         this.username = username;
         this.surName = surName;
-        this.password = password;
-    }
-
-    public User(String username, String surName, String password, List<Role> roles) {
-        this.username = username;
-        this.surName = surName;
+        this.email = email;
+        this.age = age;
         this.password = password;
         this.roles = roles;
+    }
+
+    public User(String username, String surName, String email, String age, String password) {
+        this.username = username;
+        this.surName = surName;
+        this.email = email;
+        this.age = age;
+        this.password = password;
     }
 
     @Override
