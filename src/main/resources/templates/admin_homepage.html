@@ -17,9 +17,9 @@
         <div th:align="left" class="col-md-6">
             <h3 class="text-white">
                 <a>User:</a>
-                <span  th:utext="${user.getUsername()} ">Username</span>
+                <span  th:utext="${#authentication.getPrincipal().getEmail()} ">Email</span>
                 <a >With roles:</a>
-                <span th:each="role : ${user.getRoles()}">
+                <span th:each="role : ${#authentication.getPrincipal().getRoles()}">
                     <span th:utext="${role.toString()}">Role</span>
                 </span>
             </h3>

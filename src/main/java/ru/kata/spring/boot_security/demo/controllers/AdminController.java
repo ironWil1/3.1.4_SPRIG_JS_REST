@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +30,7 @@ public class AdminController {
         List<User> listUsers = userService.getAll();
         ModelAndView mav = new ModelAndView("admin_homepage");
         mav.addObject("listUsers", listUsers);
-        mav.addObject("user",user);
+        mav.addObject("user", user);
         return mav;
     }
 

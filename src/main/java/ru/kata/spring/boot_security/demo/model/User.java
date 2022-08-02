@@ -43,6 +43,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Crucial field")
     private String password;
 
+
     @OneToMany(mappedBy="owner",
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
