@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,7 +53,7 @@
                         <a class="nav-link active" href="/admin/new">New User</a>
                     </li>
                 </ul>
-                <table class="table table-borderless border-top-2 bg-white w-100" th:align="left">
+                <table class="table table-borderless border-top-2 bg-white w-80" th:align="left">
                     <thead class="mb-3 bg-light min-vw-100">
                     <tr>
                         <th class="fw-normal fs-4">
@@ -66,164 +67,77 @@
                             <form class="form-check-input align-items-center min-vw-100">
                                 <div class="form-group align-items-center">
                                     <label for="InputName">First Name</label>
-                                    <input type="text" th:field="*{username}" class="form-control w-50" id="InputName">
-                                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" th:field="*{username}"
+                                               class="form-control form-control-sm w-30" id="InputName">
+                                        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name
+                                            error
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group align-items-center">
+                                    <label for="InputSurname">Last name</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" th:field="*{surName}"
+                                         class="form-control form-control-sm w-30" id="InputSurname">
+                                        <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Surname
+                                            error
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group align-items-center">
+                                    <label for="InputAge">Age</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" th:field="*{age}"
+                                               class="form-control form-control-sm w-30" id="InputAge">
+                                        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+                                    </div>
+                                </div>
+                                <div class="form-group align-items-center">
+                                    <label for="InputEmail">Email</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" th:field="*{email}"
+                                               class="form-control form-control-sm w-30" id="InputEmail">
+                                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group align-items-center">
+                                    <label for="InputPassword">Password</label>
+                                    <div class="col-sm-5">
+                                        <input type="password" th:field="*{password}"
+                                               class="form-control form-control-sm w-30"
+                                               id="InputPassword">
+                                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+                                            error
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Password">
+                                    <label for="FormRoleSelect">Role</label>
+                                    <div class="col-sm-5">
+                                        <select multiple class="form-control form-control-sm w-30" size="2"
+                                                th:object="${user}" th:field="*{roles}" id="FormRoleSelect">
+                                            <option value="ROLE_USER">User</option>
+                                            <option value="ROLE_ADMIN">Admin</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </td>
                     </tr>
-                    </td>
-                    <tr>
-                        <td>Name:</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" th:field="*{username}"/>
-                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
-                        </td>
 
-                    </tr>
-                    <tr>
-                        <td>Surname:</td>
-                        <td>
-                            <input type="text" th:field="*{surName}"/>
-                            <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">surName error</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Age:</td>
-                        <td>
-                            <input type="text" th:field="*{age}"/>
-                            <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>
-                            <input type="text" th:field="*{email}"/>
-                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td>
-                            <input type="password" th:field="*{password}"/>
-                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Select roles:
-                            <select th:object="${user}" th:field="*{roles}" id="role">
-                                <option value="ROLE_USER">User</option>
-                                <option value="ROLE_ADMIN">Admin</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Save"/> <input type="reset" value="Reset"/></td>
-                    </tr>
                     <tr>
                         <td>
-                            <form>
-                                <button><a href="/logout">Logout</a></button>
-                            </form>
+                            <div class="d-grid gap-2 d-md-block align-items-center">
+                                <button class="btn btn-info" type="submit">Add new user</button>
+                            </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New Client</title>
-</head>
-<body>
-<h1>New client form</h1>
-<form action="#" th:action="@{/admin/save}" th:object="${user}" method="post">
-    <table border="0" cellpadding="5">
-        <form role="form">
-            <div class="form-group">
-                <label for="exampleInputEmail1">
-                    Email address
-                </label>
-                <input type="email" class="form-control" id="exampleInputEmail1"/>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">
-                    Password
-                </label>
-                <input type="password" class="form-control" id="exampleInputPassword1"/>
-            </div>
-            <tr>
-                <td>Name:</td>
-                <td>
-                    <input type="text" th:field="*{username}"/>
-                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
-                </td>
-
-            </tr>
-            <tr>
-                <td>Surname:</td>
-                <td>
-                    <input type="text" th:field="*{surName}"/>
-                    <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">surName error</div>
-                </td>
-            </tr>
-            <tr>
-                <td>Age:</td>
-                <td>
-                    <input type="text" th:field="*{age}"/>
-                    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
-                </td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>
-                    <input type="text" th:field="*{email}"/>
-                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</div>
-                </td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td>
-                    <input type="password" th:field="*{password}"/>
-                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
-                </td>
-            </tr>
-            <tr>
-                <td>Select roles:
-                    <select th:object="${user}" th:field="*{roles}" id="role">
-                        <option value="ROLE_USER">User</option>
-                        <option value="ROLE_ADMIN">Admin</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Save"/> <input type="reset" value="Reset"/></td>
-            </tr>
-    </table>
-    <tr>
-        <td>
-            <form>
-                <button><a href="/logout">Logout</a></button>
-            </form>
-        </td>
-    </tr>
-</form>
 </body>
 </html>

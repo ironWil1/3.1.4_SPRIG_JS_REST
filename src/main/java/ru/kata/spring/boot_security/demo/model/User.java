@@ -48,6 +48,7 @@ public class User implements UserDetails {
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
                 fetch= FetchType.LAZY)
+    @NotEmpty(message = "Crucial field")
     private List<Role> roles;
 
     public User() {
