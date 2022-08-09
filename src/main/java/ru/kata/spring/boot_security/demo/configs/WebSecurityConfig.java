@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration", "/login","/error").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
+                .usernameParameter("email")
                 .loginProcessingUrl("/process_login")
                 .successHandler(successUserHandler)
                 .failureUrl("/login?error")

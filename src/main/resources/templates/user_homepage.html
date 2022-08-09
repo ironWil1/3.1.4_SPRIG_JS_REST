@@ -9,7 +9,7 @@
           rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
           crossorigin="anonymous">
-    <title>Admin Page</title>
+    <title>User page</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/user(id=${user.getId()})}" th:object="${user}">
@@ -27,7 +27,7 @@
         </div>
         <div th:align="right" class="col-md-6">
             <h5>
-                <a class="text-muted" href="#" style="text-decoration: none">Logout</a>
+                <a class="text-muted" href="/logout" style="text-decoration: none">Logout</a>
             </h5>
         </div>
     </div>
@@ -48,12 +48,12 @@
             </ul>
         </div>
         <div class="col-md-9">
-            <h3>User information panel</h3>
+            <h3>User information-page</h3>
             <table class="table border-top-2 bg-white" th:align="left">
                 <thead class="mb-3 bg-light" >
                 <tr>
                     <th class="fw-normal fs-4">
-                        About users
+                        About user
                     </th>
                 </tr>
                 </thead>

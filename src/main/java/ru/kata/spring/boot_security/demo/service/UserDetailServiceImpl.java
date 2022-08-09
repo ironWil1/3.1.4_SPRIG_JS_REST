@@ -18,11 +18,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userDao.findUserByName(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userDao.findUserByEmail(email);
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException("Пользователя с именем " +
-                    username + " не существует");
+            throw new UsernameNotFoundException("Пользователя с почтовым адресом " +
+                    email + " не существует");
         }
         return user.get();
     }

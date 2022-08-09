@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Crucial field")
     private String surName;
 
-    @Column(name="email")
+    @Column(name="email",unique = true)
     @NotEmpty(message = "Email should be filled")
     private String email;
 
@@ -48,7 +48,6 @@ public class User implements UserDetails {
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
                 fetch= FetchType.LAZY)
-    @NotEmpty(message = "Crucial field")
     private List<Role> roles;
 
     public User() {

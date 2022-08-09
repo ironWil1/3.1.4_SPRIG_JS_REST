@@ -70,7 +70,7 @@
                                     <div class="col-sm-5">
                                         <input type="text" th:field="*{username}"
                                                class="form-control form-control-sm w-30" id="InputName">
-                                        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name
+                                        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red">Name
                                             error
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                     <div class="col-sm-5">
                                         <input type="text" th:field="*{surName}"
                                          class="form-control form-control-sm w-30" id="InputSurname">
-                                        <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Surname
+                                        <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}" style="color: red">Surname
                                             error
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@
                                     <div class="col-sm-5">
                                         <input type="text" th:field="*{age}"
                                                class="form-control form-control-sm w-30" id="InputAge">
-                                        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+                                        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red">Age error</div>
                                     </div>
                                 </div>
                                 <div class="form-group align-items-center">
@@ -98,7 +98,7 @@
                                     <div class="col-sm-5">
                                         <input type="text" th:field="*{email}"
                                                class="form-control form-control-sm w-30" id="InputEmail">
-                                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error
+                                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red">Email error
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                         <input type="password" th:field="*{password}"
                                                class="form-control form-control-sm w-30"
                                                id="InputPassword">
-                                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+                                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red">Password
                                             error
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                     <label for="FormRoleSelect">Role</label>
                                     <div class="col-sm-5">
                                         <select multiple class="form-control form-control-sm w-30" size="2"
-                                                th:object="${user}" th:field="*{roles}" id="FormRoleSelect">
+                                                th:object="${user}" th:field="*{roles}" id="FormRoleSelect" required>
                                             <option value="ROLE_USER">User</option>
                                             <option value="ROLE_ADMIN">Admin</option>
                                         </select>

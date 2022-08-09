@@ -4,11 +4,14 @@ package ru.kata.spring.boot_security.demo.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.model.Roles;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,5 +70,12 @@ public class UserDaoImpl implements UserDao {
         TypedQuery<User> query = em.createQuery(
                 "SELECT u FROM User u JOIN FETCH u.roles where u.username = ?1", User.class);
         return query.setParameter(1, username).getResultList().stream().findAny();
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u JOIN FETCH u.roles where u.email = ?1", User.class);
+        return query.setParameter(1, email).getResultList().stream().findAny();
     }
 }
