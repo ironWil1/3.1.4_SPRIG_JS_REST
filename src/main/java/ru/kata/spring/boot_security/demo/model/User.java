@@ -21,7 +21,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username",unique = true)
+    @Column(name = "username")
     @Size(min = 2,max = 22,message = "Names length should be between 2 and 20 characters")
     @NotEmpty(message = "Crucial field")
     private String username;
@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Crucial field")
     private String surName;
 
-    @Column(name="email",unique = true)
+    @Column(name="email")
     @NotEmpty(message = "Email should be filled")
     private String email;
 
@@ -107,5 +107,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", surName='" + surName + '\'' +
+                ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

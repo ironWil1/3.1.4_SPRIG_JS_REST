@@ -28,6 +28,9 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     @Override
     public void saveUser(User user) {
+        System.out.println(
+                user
+        );
         roleDAO.persistRoles(user);
         em.persist(user);
     }

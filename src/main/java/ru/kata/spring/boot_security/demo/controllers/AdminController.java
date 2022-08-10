@@ -2,10 +2,11 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.model.UserList;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
@@ -25,18 +26,28 @@ public class AdminController {
         this.userService = userService;
         this.userValidator = userValidator;
     }
-
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder, HttpServletRequest request) {
+//        String httpMethod = request.getMethod();
+//        if ("POST".equals(httpMethod)) {
+//            binder.setAllowedFields("username","email", "password");
+//        } else if ("PUT".equals(httpMethod)) {
+//            // update
+//            binder.setAllowedFields("username","email", "password");
+//        }
+//
+//    }
     @GetMapping(value = "")
-    public ModelAndView home(Principal principal) {
+    public String home(Principal principal, Model model) {
+        UserList listUsers = new UserList();
+        List<User> userList = userService.getAll();
+        userList.forEach(listUsers::addUser);
+        model.addAttribute("listUsers", listUsers);
+        System.out.println(listUsers);
         if (userService.findUserByname(principal.getName()).isPresent()) {
-            User user = userService.findUserByname(principal.getName()).get();
-            List<User> listUsers = userService.getAll();
-            ModelAndView mav = new ModelAndView("admin_homepage");
-            mav.addObject("listUsers", listUsers);
-            mav.addObject("user", user);
-            return mav;
+            return "admin_homepage";
         } else {
-            return new ModelAndView("login_form");
+            return "login_form";
         }
     }
 
@@ -49,12 +60,22 @@ public class AdminController {
     public String saveUser(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors() & user.getId() == null) {
+        if (bindingResult.hasErrors()) {
             return "add_form";
-        } else if (bindingResult.hasErrors() & user.getId() != null) {
-            return "edit_error";
         }
         userService.saveUser(user);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping (value = "/edit")
+    public String editUser(@RequestParam long id,
+                           @ModelAttribute UserList userlist,
+                           BindingResult bindingResult) {
+        //userValidator.validate(userlist.findUserByID(id), bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "edit_error";
+        }
+        userService.saveUser(userlist.findUserByID(id));
         return "redirect:/admin";
     }
 
@@ -64,12 +85,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public ModelAndView editCustomerForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("edit_form");
-        User user = userService.getUser(id);
-        mav.addObject("user", user);
-        return mav;
-    }
+//    @GetMapping("/edit")
+//    public ModelAndView editCustomerForm(@RequestParam long id) {
+//        ModelAndView mav = new ModelAndView("edit_form");
+//        User user = userService.getUser(id);
+//        mav.addObject("user", user);
+//        return mav;
+//    }
 
 }
