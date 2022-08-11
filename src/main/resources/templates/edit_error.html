@@ -13,11 +13,26 @@
     <title>
         Edit error
     </title>
-    <body>
+<body>
+
 <h1 style="color: red">FILL ALL FIELDS IN ACCORDANCE WITH NEXT RULES:</h1>
 <h2>1) Name's length should be between 2 and 20 characters;</h2>
 <h2>2) Surname's length should be between 2 and 20 characters;</h2>
 <h2>3) Email's length should be between 5 and 20 characters</h2>
+<table class="table border-top-2 bg-white" th:align="left">
+    <thead class="mb-3 bg-light">
+    <tr>
+        <th class="fw-normal fs-4">
+            <h2 style="color: blue">EXTRA ERRORS</h2>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="error : ${errors}">
+        <td style="color: red" th:text="${error.getDefaultMessage()}">error</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </head>
 </html>
