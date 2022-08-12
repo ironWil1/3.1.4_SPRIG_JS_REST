@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.model;
 
 
 import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,11 @@ public class UserList {
     }
 
     public User findUserByID(long id) {
-        User foundUser = userList.stream()
+        return userList.stream()
                 .filter(user -> user.getUsername()!=null)
                 .filter(user -> user.getId()==id)
                 .findFirst()
                 .get();
-        return foundUser;
     }
 
 }

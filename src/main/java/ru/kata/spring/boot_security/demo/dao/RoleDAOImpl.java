@@ -19,9 +19,8 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public void cleanBindedRoles(User user) {
-        TypedQuery<Role> query = em.createQuery(
-                "SELECT r FROM Role r WHERE r.owner = ?1", Role.class);
-        List<Role> rolesOfUser = query.setParameter(1, user).getResultList();
+        List<Role> rolesOfUser = em.createQuery(
+                "SELECT r FROM Role r WHERE r.owner = ?1", Role.class).setParameter(1, user).getResultList();
         rolesOfUser.forEach(role -> em.remove(role));
     }
 
@@ -29,7 +28,7 @@ public class RoleDAOImpl implements RoleDAO {
     @Override
     public void persistRoles(User user) {
         List<Role> roles = user.getRoles();
-        if(roles == null) {
+        if (roles == null) {
             roles = new ArrayList<>();
             roles.add(new Role(Roles.userRole()));
             user.setRoles(roles);

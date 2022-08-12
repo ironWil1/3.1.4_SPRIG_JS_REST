@@ -13,7 +13,6 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,10 +31,8 @@ public class AdminController {
     @GetMapping(value = "")
     public String home(Principal principal, Model model) {
         UserList listUsers = new UserList();
-        List<User> userList = userService.getAll();
-        userList.forEach(listUsers::addUser);
+        listUsers.setUserList(userService.getAll());
         model.addAttribute("listUsers", listUsers);
-        System.out.println(listUsers);
         if (userService.findUserByname(principal.getName()).isPresent()) {
             return "admin_homepage";
         } else {

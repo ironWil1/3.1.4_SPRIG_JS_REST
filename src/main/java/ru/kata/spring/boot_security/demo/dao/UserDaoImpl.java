@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;
     private final RoleDAO roleDAO;
+
     @Autowired
     public UserDaoImpl(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
@@ -28,9 +29,6 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     @Override
     public void saveUser(User user) {
-        System.out.println(
-                user
-        );
         roleDAO.persistRoles(user);
         em.persist(user);
     }
@@ -38,17 +36,15 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     @Override
     public void deleteUser(long id) {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u WHERE u.id = ?1", User.class);
-        em.remove(query.setParameter(1,id).getSingleResult());
+        em.createQuery(
+                "DELETE FROM User u WHERE u.id = ?1").setParameter(1, id).executeUpdate();
     }
 
     @Transactional(readOnly = true)
     @Override
     public User getUser(long id) {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u WHERE u.id = ?1", User.class);
-        return query.setParameter(1, id).getSingleResult();
+        return em.createQuery(
+                "SELECT u FROM User u WHERE u.id = ?1", User.class).setParameter(1, id).getSingleResult();
     }
 
     @Transactional
@@ -62,23 +58,22 @@ public class UserDaoImpl implements UserDao {
     @Transactional(readOnly = true)
     @Override
     public List<User> showAllUsers() {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u", User.class);
-        return query.getResultList();
+        return em.createQuery(
+                "SELECT u FROM User u", User.class).getResultList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Optional<User> findUserByName(String username) {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u JOIN FETCH u.roles where u.username = ?1", User.class);
-        return query.setParameter(1, username).getResultList().stream().findAny();
+        return em.createQuery(
+                "SELECT u FROM User u JOIN FETCH u.roles where u.username = ?1", User.class)
+                .setParameter(1, username).getResultList().stream().findAny();
     }
 
     @Override
     public Optional<User> findUserByEmail(String email) {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u JOIN FETCH u.roles where u.email = ?1", User.class);
-        return query.setParameter(1, email).getResultList().stream().findAny();
+        return em.createQuery(
+                "SELECT u FROM User u JOIN FETCH u.roles where u.email = ?1", User.class)
+                .setParameter(1, email).getResultList().stream().findAny();
     }
 }
