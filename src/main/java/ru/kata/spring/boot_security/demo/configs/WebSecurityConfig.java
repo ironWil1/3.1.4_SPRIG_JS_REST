@@ -31,11 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
+                .csrf().disable().authorizeRequests()
+//                .antMatchers("/").permitAll();
                 .antMatchers("/static/favicon.ico").permitAll()
                 .antMatchers("/admin","/admin/*").hasRole("ADMIN")
-                .antMatchers("/registration", "/login","/error").permitAll()
+                .antMatchers("/registration", "/login","/error","/api/*").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("email")

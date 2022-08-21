@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +29,7 @@ public class Role implements GrantedAuthority {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
                             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private User owner;
     public Role(){}
     public Role(User owner, String role) {
@@ -40,6 +42,7 @@ public class Role implements GrantedAuthority {
     }
 
     @Column(name = "role")
+
     private String role;
 
     @Override

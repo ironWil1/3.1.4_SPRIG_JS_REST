@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,10 +18,10 @@
             <div th:align="left" class="col-md-6">
                 <h3 class="text-white">
                     <a>User: </a>
-                    <span sec:authentication="principal.email">Firstname</span>
+<!--                    <span sec:authentication="principal.email">Firstname</span>-->
                     <a>With roles: </a>
-                    <span th:each="role : ${#authentication.getPrincipal().getRoles()}">
-                    <span th:utext="${role.toString()}">Role</span>
+<!--                    <span th:each="role : ${#authentication.getPrincipal().getRoles()}">-->
+<!--                    <span th:utext="${role.toString()}">Role</span>-->
                 </span>
                 </h3>
             </div>

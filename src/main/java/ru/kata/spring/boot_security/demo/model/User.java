@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -48,6 +49,7 @@ public class User implements UserDetails {
                 cascade = {CascadeType.DETACH,CascadeType.MERGE,
                 CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
                 fetch= FetchType.LAZY)
+    @JsonManagedReference
     private List<Role> roles;
 
     public User() {

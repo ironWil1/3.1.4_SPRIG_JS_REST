@@ -28,17 +28,18 @@ public class AdminController {
         this.userListValidator = userListValidator;
     }
 
-    @GetMapping(value = "")
-    public String home(Principal principal, Model model) {
-        UserList listUsers = new UserList();
-        listUsers.setUserList(userService.getAll());
-        model.addAttribute("listUsers", listUsers);
-        if (userService.findUserByname(principal.getName()).isPresent()) {
-            return "admin_homepage";
-        } else {
-            return "login_form";
-        }
-    }
+//    @GetMapping(value = "")
+//    public String home(Principal principal, Model model) {
+//        UserList listUsers = new UserList();
+//        listUsers.setUserList(userService.getAll());
+//        model.addAttribute("listUsers", listUsers);
+////        if (userService.findUserByname(principal.getName()).isPresent()) {
+////            return "admin_homepage";
+////        } else {
+////            return "login_form";
+////        }
+//        return "admin_homepage";
+//    }
 
     @GetMapping("/new")
     public String newCustomerForm(@ModelAttribute("user") User user) {
