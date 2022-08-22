@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
           crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <title>Admin Page</title>
 </head>
 <body>
-<form action="#" th:action="@{/admin/save}" th:object="${user}" method="post">
+<form action="#" id="addUserForm" method="post">
     <div class="container-fluid min-vh-100 bg-light">
         <div class="row mb-3 align-items-end bg-dark">
             <div th:align="left" class="col-md-6">
-                <h3 class="text-white">
-                    <a>User: </a>
-<!--                    <span sec:authentication="principal.email">Firstname</span>-->
-                    <a>With roles: </a>
-<!--                    <span th:each="role : ${#authentication.getPrincipal().getRoles()}">-->
-<!--                    <span th:utext="${role.toString()}">Role</span>-->
-                </span>
+                <h3 class="text-white" id="userInfo">
                 </h3>
             </div>
             <div th:align="right" class="col-md-6">
@@ -65,58 +63,49 @@
                         <td>
                             <form class="form-check-input align-items-center min-vw-100">
                                 <div class="form-group align-items-center">
-                                    <label for="InputName">First Name</label>
+                                    <label for="username">First Name</label>
                                     <div class="col-sm-5">
-                                        <input type="text" th:field="*{username}"
-                                               class="form-control form-control-sm w-30" id="InputName">
-                                        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red">Name
-                                            error
-                                        </div>
+                                        <input type="text"
+                                               class="form-control form-control-sm w-30" name="username" id="username">
+
                                     </div>
                                 </div>
                                 <div class="form-group align-items-center">
-                                    <label for="InputSurname">Last name</label>
+                                    <label for="surName">Last name</label>
                                     <div class="col-sm-5">
-                                        <input type="text" th:field="*{surName}"
-                                         class="form-control form-control-sm w-30" id="InputSurname">
-                                        <div th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}" style="color: red">Surname
-                                            error
-                                        </div>
+                                        <input type="text"
+                                               class="form-control form-control-sm w-30" name="surName" id="surName">
+
                                     </div>
                                 </div>
                                 <div class="form-group align-items-center">
-                                    <label for="InputAge">Age</label>
+                                    <label for="age">Age</label>
                                     <div class="col-sm-5">
-                                        <input type="text" th:field="*{age}"
-                                               class="form-control form-control-sm w-30" id="InputAge">
-                                        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red">Age error</div>
+                                        <input type="text"
+                                               class="form-control form-control-sm w-30" name="age" id="age">
                                     </div>
                                 </div>
                                 <div class="form-group align-items-center">
-                                    <label for="InputEmail">Email</label>
+                                    <label for="email">Email</label>
                                     <div class="col-sm-5">
-                                        <input type="text" th:field="*{email}"
-                                               class="form-control form-control-sm w-30" id="InputEmail">
-                                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red">Email error
-                                        </div>
+                                        <input type="text"
+                                               class="form-control form-control-sm w-30" name="email" id="email">
                                     </div>
                                 </div>
                                 <div class="form-group align-items-center">
-                                    <label for="InputPassword">Password</label>
+                                    <label for="password">Password</label>
                                     <div class="col-sm-5">
-                                        <input type="password" th:field="*{password}"
+                                        <input type="password"
                                                class="form-control form-control-sm w-30"
-                                               id="InputPassword">
-                                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red">Password
-                                            error
-                                        </div>
+                                               name="password"
+                                               id="password">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="FormRoleSelect">Role</label>
+                                    <label for="role">Role</label>
                                     <div class="col-sm-5">
-                                        <select multiple class="form-control form-control-sm w-30" size="2"
-                                                th:object="${user}" th:field="*{roles}" id="FormRoleSelect" required>
+                                        <select multiple class="form-control form-control-sm w-30" size="2" name="role"
+                                                id="role" required>
                                             <option value="ROLE_USER">User</option>
                                             <option value="ROLE_ADMIN">Admin</option>
                                         </select>
@@ -138,5 +127,8 @@
             </div>
         </div>
     </div>
+</form>
+<script type="text/javascript" src="../JS/main.js"></script>
+<script type="text/javascript" src="../JS/userOperations.js"></script>
 </body>
 </html>

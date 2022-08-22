@@ -41,10 +41,10 @@ public class AdminController {
 //        return "admin_homepage";
 //    }
 
-    @GetMapping("/new")
-    public String newCustomerForm(@ModelAttribute("user") User user) {
-        return "add_form";
-    }
+//    @GetMapping("/new")
+//    public String newCustomerForm(@ModelAttribute("user") User user) {
+//        return "add_form";
+//    }
 
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") @Valid User user,

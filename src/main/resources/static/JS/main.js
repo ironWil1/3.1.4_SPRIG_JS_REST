@@ -1,14 +1,19 @@
 const urlListOfUsers = 'http://localhost:8080/api/admin';
 const urlOneUser = 'http://localhost:8080/api/admin/edit/';
 
-
 let usersTable = '';
 let userInfo = '';
 
+function newLocation() {
+    window.location.href = "admin/new";
+}
+
+function UsersTableLocation() {
+    window.location.href = "admin";
+}
 
 function getRoles(roles) {
     let tableRoles = '';
-    console.log(roles)
     if (roles.length > 1) {
         tableRoles += 'ADMIN USER'
     } else {
@@ -33,8 +38,8 @@ function showEditModal(id) {
             $('#InputEditAge').val(user.age);
             $('#InputEditEmail').val(user.email);
             $('#InputEditPassword').val(user.password);
-      })
-modalInstance.show(modal);
+        })
+    modalInstance.show(modal);
 }
 
 function showDeleteModal(id) {
@@ -42,7 +47,6 @@ function showDeleteModal(id) {
     let modal = document.getElementById('deleteModal');
 
     let href = urlOneUser + id
-    console.log(href)
 
     fetch(href)
         .then(result => result.json())
@@ -64,7 +68,6 @@ fetch(urlListOfUsers)
     .then((data) => {
         for (let key = 0, size = data[1].length; key < size; key++) {
             let reff = 'http://localhost:8080/api/admin/edit/' + data[1][key].id
-            console.log(reff)
             usersTable += '<tr><td class="id">'
                 + data[1][key].id
                 + '</td><td class="username">'
@@ -85,15 +88,12 @@ fetch(urlListOfUsers)
                 + '<button type="button" class="btn btn-primary btn-sm me-2" ' +
                 'onclick="showEditModal(' + data[1][key].id + ')" ' +
                 'data-bs-toggle="modal">Edit</button>'
-                + '<button type="button" href = urlOneUser class="btn btn-danger btn-sm" '+
+                + '<button type="button" href = urlOneUser class="btn btn-danger btn-sm" ' +
                 'onclick="showDeleteModal(' + data[1][key].id + ')" '
-                +'data-bs-toggle="modal" data-bs-target="">'
+                + 'data-bs-toggle="modal" data-bs-target="">'
                 + 'Delete </button>'
                 + '</td>';
-
-
         }
-
         userInfo +=
             '<a>User: </a>' + data[0][0] +
             '<a> With roles: </a>' + getRoles(data[0][1]);
@@ -102,4 +102,6 @@ fetch(urlListOfUsers)
 
         $('#userInfo').append(userInfo);
     })
+
+
 
