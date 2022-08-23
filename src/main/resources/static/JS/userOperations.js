@@ -21,10 +21,20 @@ function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     let userInfo = Object.fromEntries(data.entries());
-    return _postData(urlSaveUser, userInfo)
-        .then(json => {
-            console.log(json) // Handle success
-        })
+    let json = JSON.stringify(userInfo)
+    let obj = JSON.parse(json)
+    obj.roles = [obj.roles]
+    json = JSON.stringify(obj)
+    console.log(json)
+    fetch(urlSaveUser, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: json
+    }).then(json => {
+        console.log(json) // Handle success
+    })
         .catch(err => {
             console.log(err) // Handle errors
         });

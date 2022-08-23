@@ -59,9 +59,10 @@ public class AdminRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @CrossOrigin(origins = "http://localhost:8080")
+    //@CrossOrigin(origins = "http://localhost:8080")
     @PostMapping (value = "/save")
-    public ResponseEntity<User> saveUser(User user) {
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        System.out.println(user);
         try {
             userService.saveUser(user);
             return new ResponseEntity<>(user,HttpStatus.OK);
