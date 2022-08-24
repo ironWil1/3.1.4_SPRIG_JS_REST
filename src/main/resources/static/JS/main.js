@@ -8,7 +8,7 @@ function newLocation() {
     window.location.href = "admin/new";
 }
 
-function UsersTableLocation() {
+function goHome() {
     window.location.href = "admin";
 }
 

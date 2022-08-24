@@ -71,6 +71,16 @@ public class AdminRestController {
         }
     }
 
+    @PostMapping (value = "/delete")
+    public ResponseEntity<User> deleteUser(@RequestBody User user) {
+        System.out.println(user);
+        userService.deleteUser(user.getId());
+        try {
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 

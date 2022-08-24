@@ -90,69 +90,76 @@
     </div>
 </div>
 
-<div class="modal fade" id="editModal"
-     data-bs-backdrop="static"
-     data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit
-                    user</h5>
-                <button type="button" class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group align-items-center">
-                    <label for="InputEditID" class="col-form-label">ID</label>
-                    <input type="text"
+<form class="editForm" action="#" method="post">
+    <div class="modal fade" id="editModal"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit
+                        user</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group align-items-center">
+                        <label for="InputEditID" class="col-form-label">ID</label>
+                        <input type="text"
                                class="form-control form-control-sm w-30"
-                               disabled
-                               id="InputEditID">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputEditUsername" class="col-form-label">Username</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           required
-                           id="InputEditUsername">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputEditSurname" class="col-form-label">Last Name</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           required
-                           id="InputEditSurname">
-                </div>
+                               readonly
+                               id="InputEditID"
+                               name = "id">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputEditUsername" class="col-form-label">Username</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               required
+                               id="InputEditUsername"
+                               name = "username">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputEditSurname" class="col-form-label">Last Name</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               required
+                               id="InputEditSurname"
+                               name = "surName">
+                    </div>
 
-                <div class="form-group align-items-center">
-                    <label for="InputEditAge" class="col-form-label">Age</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           required
-                           id="InputEditAge">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputEditEmail" class="col-form-label">Email</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           required
-                           id="InputEditEmail">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputEditPassword" class="col-form-label">Password</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-
-                           id="InputEditPassword">
-                </div>
-                <div class="form-group">
-                    <label for="FormEditRoleSelect" class="col-form-label">Role</label>
+                    <div class="form-group align-items-center">
+                        <label for="InputEditAge" class="col-form-label">Age</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               required
+                               id="InputEditAge"
+                               name = "age">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputEditEmail" class="col-form-label">Email</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               required
+                               id="InputEditEmail"
+                               name = "email">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputEditPassword" class="col-form-label">Password</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               id="InputEditPassword"
+                               name = "password">
+                    </div>
+                    <div class="form-group">
+                        <label for="FormEditRoleSelect" class="col-form-label">Role</label>
                         <select multiple
                                 class="form-control form-control-sm w-30"
                                 size="2"
                                 id="FormEditRoleSelect"
+                                name = "roles"
                                 required>
                             <option value="ROLE_USER">
                                 User
@@ -161,100 +168,112 @@
                                 Admin
                             </option>
                         </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close
-                    </button>
-                    <button type="submit"
-                            class="btn btn-primary">Edit
-                    </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close
+                        </button>
+                        <button type="submit"
+                                class="btn btn-primary">Edit
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
 
 <div class="modal fade" id="deleteModal"
      data-bs-backdrop="static"
      data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="editModalLabel" aria-hidden="true">
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete
-                    user</h5>
-                <button type="button" class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group align-items-center">
-                    <label for="InputDeleteID" class="col-form-label">ID</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeleteID">
+        <form class="deleteForm" action="#" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete
+                        user</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
-                <div class="form-group align-items-center">
-                    <label for="InputDeleteUsername" class="col-form-label">Username</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeleteUsername">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputDeleteSurname" class="col-form-label">Last Name</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeleteSurname">
-                </div>
+                <div class="modal-body">
+                    <div class="form-group align-items-center">
+                        <label for="InputDeleteID" class="col-form-label">ID</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeleteID"
+                               name="id">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputDeleteUsername" class="col-form-label">Username</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeleteUsername"
+                               name="username">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputDeleteSurname" class="col-form-label">Last Name</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeleteSurname"
+                               name="surName">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputDeleteAge" class="col-form-label">Age</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeleteAge"
+                               name="age">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputDeleteEmail" class="col-form-label">Email</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeleteEmail"
+                               name="email">
+                    </div>
+                    <div class="form-group align-items-center">
+                        <label for="InputDeletePassword" class="col-form-label">Password</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="InputDeletePassword"
+                               name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="FormDeleteRoleSelect" class="col-form-label">Role</label>
+                        <input type="text"
+                               class="form-control form-control-sm w-30"
+                               readonly
+                               id="FormDeleteRoleSelect"
+                               name="roles">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close
+                        </button>
+                        <button type="submit"
+                                class="btn btn-danger">Delete
+                        </button>
+                    </div>
 
-                <div class="form-group align-items-center">
-                    <label for="InputDeleteAge" class="col-form-label">Age</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeleteAge">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputDeleteEmail" class="col-form-label">Email</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeleteEmail">
-                </div>
-                <div class="form-group align-items-center">
-                    <label for="InputDeletePassword" class="col-form-label">Password</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="InputDeletePassword">
-                </div>
-                <div class="form-group">
-                    <label for="FormDeleteRoleSelect" class="col-form-label">Role</label>
-                    <input type="text"
-                           class="form-control form-control-sm w-30"
-                           disabled
-                           id="FormDeleteRoleSelect">
-                </div>
-                <div class="modal-footer">
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close
-                    </button>
-                    <button type="submit"
-                            class="btn btn-danger">Delete
-                    </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <script type="text/javascript" src="JS/main.js"></script>
+<script type="text/javascript" src="JS/deleteUser.js"></script>
 
 </body>
 </html>

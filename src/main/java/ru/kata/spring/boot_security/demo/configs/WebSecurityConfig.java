@@ -32,23 +32,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable().authorizeRequests()
-                .antMatchers("/").permitAll();
-//                .antMatchers("/admin","/admin/*").hasRole("ADMIN")
-//                .antMatchers("/registration", "/login","/error","/api/*").permitAll()
-//                .and()
-//                .formLogin().loginPage("/login")
-//                .usernameParameter("email")
-//                .loginProcessingUrl("/process_login")
-//                .successHandler(successUserHandler)
-//                .failureUrl("/login?error")
-//                .and()
-//                .logout()
-//                .permitAll()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login")
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/accessDenied");
+//                .antMatchers("/").permitAll();
+                .antMatchers("/admin","/admin/*").hasRole("ADMIN")
+                .antMatchers("/registration", "/login","/error","/api/*").permitAll()
+                .and()
+                .formLogin().loginPage("/login")
+                .usernameParameter("email")
+                .loginProcessingUrl("/process_login")
+                .successHandler(successUserHandler)
+                .failureUrl("/login?error")
+                .and()
+                .logout()
+                .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/accessDenied");
     }
 
     // аутентификация inMemory
