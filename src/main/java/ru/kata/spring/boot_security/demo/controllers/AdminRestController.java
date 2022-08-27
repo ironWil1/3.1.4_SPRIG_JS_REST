@@ -70,7 +70,6 @@ public class AdminRestController {
         }
     }
 
-    //@CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(value = "/save")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         System.out.println(user);

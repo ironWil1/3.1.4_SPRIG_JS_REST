@@ -28,23 +28,22 @@ public class AdminController {
         this.userListValidator = userListValidator;
     }
 
-//    @GetMapping(value = "")
-//    public String home(Principal principal, Model model) {
-//        UserList listUsers = new UserList();
-//        listUsers.setUserList(userService.getAll());
-//        model.addAttribute("listUsers", listUsers);
-////        if (userService.findUserByname(principal.getName()).isPresent()) {
-////            return "admin_homepage";
-////        } else {
-////            return "login_form";
-////        }
-//        return "admin_homepage";
-//    }
+    @GetMapping(value = "")
+    public String home(Principal principal, Model model) {
+        UserList listUsers = new UserList();
+        listUsers.setUserList(userService.getAll());
+        model.addAttribute("listUsers", listUsers);
+        if (userService.findUserByname(principal.getName()).isPresent()) {
+            return "admin_homepage";
+        } else {
+            return "login_form";
+        }
+    }
 
-//    @GetMapping("/new")
-//    public String newCustomerForm(@ModelAttribute("user") User user) {
-//        return "add_form";
-//    }
+    @GetMapping("/new")
+    public String newCustomerForm(@ModelAttribute("user") User user) {
+        return "add_form";
+    }
 
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") @Valid User user,
