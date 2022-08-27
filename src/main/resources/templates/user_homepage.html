@@ -1,55 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
           crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <title>User page</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/user(id=${user.getId()})}" th:object="${user}">
 <div class="container-fluid min-vh-100 bg-light">
     <div class="row mb-3 align-items-end bg-dark">
-        <div th:align="left" class="col-md-6">
-            <h3 class="text-white">
-                <a>User:</a>
-                <span  th:utext="${#authentication.getPrincipal().getEmail()}">Username</span>
-                <a >With roles:</a>
-                <span th:each="role : ${#authentication.getPrincipal().getRoles()}">
-                    <span th:utext="${role.toString()}">Role</span>
-                </span>
+        <div align="left" class="col-md-6">
+            <h3 class="text-white" id="userInfo">
+<!--               JS code-->
             </h3>
         </div>
-        <div th:align="right" class="col-md-6">
+        <div align="right" class="col-md-6">
             <h5>
                 <a class="text-muted" href="/logout" style="text-decoration: none">Logout</a>
             </h5>
         </div>
     </div>
     <div class="row">
-        <div th:with = "isAdmin = ${#authentication.getPrincipal().getRoles().toString().contains('ADMIN')}" class="col-md-3 bg-white min-vh-100" th:switch="${isAdmin}">
-            <ul th:case="false" class="nav flex-column nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/user">User</a>
-                </li>
-            </ul>
-            <ul th:case="true" class="nav flex-column nav-pills">
-                <li class="nav-item" >
-                    <a class="nav-link" href="/admin">Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/user">User</a>
-                </li>
-            </ul>
+        <div class="col-md-3 bg-white min-vh-100" id = "navAdminUser">
+<!--            JS code here-->
         </div>
         <div class="col-md-9">
             <h3>User information-page</h3>
-            <table class="table border-top-2 bg-white" th:align="left">
+            <table class="table border-top-2 bg-white"align="left">
                 <thead class="mb-3 bg-light" >
                 <tr>
                     <th class="fw-normal fs-4">
@@ -83,18 +69,8 @@
                                 </th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td th:align="left" th:utext="${user.getId()}">VALUE</td>
-                                <td th:align="left" th:utext="${user.getUsername()}">VALUE</td>
-                                <td th:align="left"  th:utext="${user.getSurName()}">VALUE</td>
-                                <td th:align="left"  th:utext="${user.getAge()}">VALUE</td>
-                                <td th:align="left"  th:utext="${user.getEmail()}">VALUE</td>
-                                <td th:align="left"><span th:each="role : ${user.getRoles()}">
-                                    <span th:utext="${role.toString()}">Role</span>
-                                </span>
-                                </td>
-                            </tr>
+                            <tbody class="userPage" id="userPage">
+                            <!--               JS code-->
                             </tbody>
                         </table>
                     </td>
@@ -104,5 +80,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="JS/main.js"></script>
 </body>
 </html>

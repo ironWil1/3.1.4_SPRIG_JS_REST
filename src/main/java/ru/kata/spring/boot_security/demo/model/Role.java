@@ -31,6 +31,7 @@ public class Role implements GrantedAuthority {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference
     private User owner;
+
     public Role(){}
     public Role(User owner, String role) {
         this.owner = owner;

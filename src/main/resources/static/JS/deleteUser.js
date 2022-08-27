@@ -18,13 +18,15 @@ function handleSubmit(event) {
         body: json
     }).then(json => {
         console.log(json)
-        goHome();// Handle success
+        showUserInfo();
+        drawTable();
+// Handle success
     })
         .catch(err => {
             console.log(err) // Handle errors
         });
 }
 
-const form = document.querySelector('.deleteForm');
-console.log(form)
-form.addEventListener('submit', handleSubmit);
+const deleteForm = document.querySelector('.deleteForm');
+console.log(deleteForm)
+deleteForm.addEventListener('submit', handleSubmit);

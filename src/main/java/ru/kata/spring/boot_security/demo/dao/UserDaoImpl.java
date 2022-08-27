@@ -38,6 +38,8 @@ public class UserDaoImpl implements UserDao {
     public void deleteUser(long id) {
         em.createQuery(
                 "DELETE FROM User u WHERE u.id = ?1").setParameter(1, id).executeUpdate();
+        em.createNativeQuery(
+                "DELETE FROM Role r WHERE r.user_id = ?1").setParameter(1, id).executeUpdate();
     }
 
     @Transactional(readOnly = true)

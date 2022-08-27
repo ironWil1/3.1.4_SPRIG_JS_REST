@@ -17,7 +17,7 @@ async function _postData(url = '', data = {}) {
     return response.json();
 }
 
-function handleSubmit(event) {
+function handleSaveSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     let userInfo = Object.fromEntries(data.entries());
@@ -33,12 +33,25 @@ function handleSubmit(event) {
         },
         body: json
     }).then(json => {
-        console.log(json) // Handle success
+        console.log(json)
+        if ($(".editForm")[0]) {
+            console.log('INSIDE OF MODAL')
+            $('#closeButton').click()
+        }
+        showUserInfo();
+        drawTable();
+// Handle success
     })
         .catch(err => {
             console.log(err) // Handle errors
         });
 }
 
-const form = document.querySelector('form');
-form.addEventListener('submit', handleSubmit);
+if ($(".editForm")[0]) {
+    const editForm = document.querySelector('.editForm');
+    editForm.addEventListener('submit', handleSaveSubmit);
+}
+
+
+
+
