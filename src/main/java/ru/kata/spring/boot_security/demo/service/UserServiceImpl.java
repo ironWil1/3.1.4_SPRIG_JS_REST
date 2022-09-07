@@ -3,8 +3,11 @@ package ru.kata.spring.boot_security.demo.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.model.Roles;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,12 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+    @PostConstruct
+    private void postConstruct() {
+        User admin = new User("user","user", "user@mail.ru","33","123456");
+        admin.addRole(new Role(Roles.adminRole()));
+        userDao.saveUser(admin);
+    }
     @Transactional
     public void saveUser(User user) {
         if (user.getId() != null) {

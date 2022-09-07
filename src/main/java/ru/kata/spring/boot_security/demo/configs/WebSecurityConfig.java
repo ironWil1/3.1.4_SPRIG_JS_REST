@@ -10,20 +10,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.Roles;
-import ru.kata.spring.boot_security.demo.model.User;
 
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDao userDao;
     private final SuccessUserHandler successUserHandler;
     private final UserDetailsService userDetailService;
 
-    public WebSecurityConfig(UserDao userDao, SuccessUserHandler successUserHandler, UserDetailsService userDetailService) {
-        this.userDao = userDao;
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsService userDetailService) {
         this.successUserHandler = successUserHandler;
         this.userDetailService = userDetailService;
     }
@@ -54,9 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // аутентификация inMemory
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        User admin = new User("user","user", "user@mail.ru","33","123456");
-        admin.addRole(new Role(Roles.adminRole()));
-        userDao.saveUser(admin);
         auth.userDetailsService(userDetailService);
     }
 
